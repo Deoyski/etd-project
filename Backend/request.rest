@@ -1,0 +1,86 @@
+// USER
+GET http://localhost:5000/rule-base
+
+###
+GET http://localhost:5000/users/1
+
+###
+POST http://localhost:5000/history
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "no_pemeriksaan": "ABC1234",
+    "inisial_nama": "JD",
+    "tgl_pemeriksaan": "2024-04-04T12:00:00Z",
+    "jenis_kelamin": "Laki-laki",
+    "perkiraan_umur": 30,
+    "tgl_penemuan": "2024-04-03T08:00:00Z",
+    "lokasi_penemuan": "Jalan Raya",
+    "informasi_tambahan": "Tidak ada informasi tambahan",
+    "ciri_jenazah": {
+        "warna_rambut": "Cokelat",
+        "tinggi_badan": "170 cm",
+        "ciri_lain": "Tidak ada ciri khusus"
+    },
+    "waktu_kematian": "10:00"
+}
+
+###
+PATCH http://localhost:5000/users/1
+Content-Type: application/json
+
+{
+    "name": "John doeeee",
+    "email": "johndoe@example.com", 
+    "password": "password123",
+    "role": "admin"
+}
+
+###
+DELETE http://localhost:5000/users/1
+
+// INTERVAL
+GET http://localhost:5000/interval
+
+###
+GET http://localhost:5000/interval/1
+
+###
+POST http://localhost:5000/interval
+Content-Type: application/json
+
+{
+    "kode": "P2",
+    "keterangan": "Kulit berwarna kecokelatan"
+}
+
+###
+POST http://localhost:5000/ciri-jenazah
+Content-Type: application/json
+
+{
+    "kode": "P5",
+    "keterangan": "Kulit berwarna kecokelatan"
+}
+
+###
+POST http://localhost:5000/rule-base
+Content-Type: application/json
+
+{
+    "intervalId": 1,
+    "ciriJenazahId": 6
+}
+
+### 
+PATCH http://localhost:5000/interval/1
+Content-Type: application/json
+
+{
+    "kode": "John doeeee",
+    "keterangan": "johndoe@example.com"
+}
+
+###
+DELETE http://localhost:5000/interval/3
