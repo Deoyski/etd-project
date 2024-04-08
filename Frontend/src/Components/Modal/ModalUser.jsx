@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function ModalUser({ closeModal, selectedData, fetchData }) {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -70,16 +70,16 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-sm font-medium text-gray-700"
               >
-                Name
+                Username
               </label>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="username"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                 required

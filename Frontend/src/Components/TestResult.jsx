@@ -6,14 +6,15 @@ import { useState } from "react";
 
 function TestResult() {
   const location = useLocation();
+  const userId = localStorage.getItem('id');
   const formData = location.state ? location.state.formData : null;
   const answers = location.state ? location.state.answers : [];
   // const answerCodes = location.state ? location.state.answerCodes : [];
   const answerCodes = location.state ? location.state.answerCodes.slice() : [];
-const index = answerCodes.indexOf(46);
-if (index !== -1) {
-  answerCodes.splice(index, 1);
-}
+  const index = answerCodes.indexOf(46);
+  if (index !== -1) {
+    answerCodes.splice(index, 1);
+  }
   const [data, setDataRuleBase] = useState([]);
   const [timeOfDeath, setTimeOfDeath] = useState(null);
 
@@ -89,7 +90,41 @@ if (index !== -1) {
         setTimeOfDeath("Ciri Jenazah belum dapat ditentukan");
       });
   };
-  
+
+  const handleSaveResult = () => {
+    // Lakukan permintaan POST ke endpoint backend
+    fetch("http://localhost:5000/history", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId, 
+        no_pemeriksaan: formData.no_pemeriksaan,
+        inisial_nama: formData.inisial_nama,
+        tgl_pemeriksaan: formData.tgl_pemeriksaan,
+        jenis_kelamin: formData.jenis_kelamin,
+        perkiraan_umur: formData.perkiraan_umur,
+        tgl_penemuan: formData.tgl_penemuan,
+        lokasi_penemuan: formData.lokasi_penemuan,
+        informasi_tambahan: formData.informasi_tambahan,
+        ciri_jenazah: answers,
+        waktu_kematian: timeOfDeath,
+      }),
+    })
+    .then(response => {
+      if (response.ok) {
+        // Berhasil disimpan, tambahkan penanganan sesuai kebutuhan Anda
+        console.log("Data hasil tes berhasil disimpan.");
+      } else {
+        // Gagal disimpan, tambahkan penanganan sesuai kebutuhan Anda
+        console.error("Gagal menyimpan data hasil tes.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  };
 
   // console.log("rulebase :", data);
   // // Log formData and answers to console
@@ -110,14 +145,13 @@ if (index !== -1) {
                 Test Result
               </div>
               <div className="flex gap-3">
-                  <button className="bg-[#F3B320] text-white px-10 py-2 rounded-md">
-                Print Hasil
-              </button>
-              <button className="bg-[#F3B320] text-white px-10 py-2 rounded-md">
-                Simpan Hasil
-              </button>
+                <button className="bg-[#F3B320] text-white px-10 py-2 rounded-md">
+                  Print Hasil
+                </button>
+                <button onClick={handleSaveResult} className="bg-[#F3B320] text-white px-10 py-2 rounded-md">
+                  Simpan Hasil
+                </button>
               </div>
-            
             </div>
             <div className="lg:flex pt-12">
               <div className="lg:w-4/12 flex flex-col justify-start gap-4">
@@ -164,8 +198,6 @@ if (index !== -1) {
                   </p>
                   <ol className="text-gray-500 list-decimal pl-4">
                     {answers
-                      // Filter pertanyaan dengan kode "P34"
-                  
                       .map((answer, index) => (
                         <li key={index} className="text-gray-500">
                           {answer}
@@ -176,7 +208,9 @@ if (index !== -1) {
                 <div className="flex flex-col gap-1">
                   <p className="font-bold">Waktu Sejak Kematian</p>
                   <p className="text-gray-500">
-                    {timeOfDeath ? timeOfDeath : "Belum ada interval waktu saat kematian yang tepat"}
+                    {timeOfDeath
+                      ? timeOfDeath
+                      : "Belum ada interval waktu saat kematian yang tepat"}
                   </p>
                 </div>
               </div>

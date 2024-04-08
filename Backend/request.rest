@@ -19,11 +19,10 @@ Content-Type: application/json
     "lokasi_penemuan": "Jalan Raya",
     "informasi_tambahan": "Tidak ada informasi tambahan",
     "ciri_jenazah": {
-        "warna_rambut": "Cokelat",
-        "tinggi_badan": "170 cm",
-        "ciri_lain": "Tidak ada ciri khusus"
+        0: "Suhu tubuh mayat dingin dan sudah sama dengan suhu ruangan (28 - 29 C) - TIDAK",
+        1: "Bintik-bintik pendarahan (tardieu spots) - IYA"
     },
-    "waktu_kematian": "10:00"
+    "waktu_kematian": "0-30 menit"
 }
 
 ###
@@ -41,10 +40,11 @@ Content-Type: application/json
 DELETE http://localhost:5000/users/1
 
 // INTERVAL
-GET http://localhost:5000/interval
+GET http://localhost:5000/interval?id=1
 
 ###
-GET http://localhost:5000/interval/1
+GET http://localhost:5000/interval/2
+
 
 ###
 POST http://localhost:5000/interval
@@ -56,21 +56,23 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/ciri-jenazah
+POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "kode": "P5",
-    "keterangan": "Kulit berwarna kecokelatan"
+    "email": "user1@gmail.com",
+    "password": "user1"
 }
 
 ###
-POST http://localhost:5000/rule-base
+POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "intervalId": 1,
-    "ciriJenazahId": 6
+    "email": "user1@gmail.com",
+    "username": "user1",
+    "password": "user1",
+    "role": "user"
 }
 
 ### 

@@ -1,5 +1,6 @@
 import User from "../models/UserModels.js";
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 // Fungsi untuk membuat token
 const generateToken = (userId) => {
@@ -15,14 +16,22 @@ export const login = async (req, res) => {
     const user = await User.findOne({ where: { email } });
 
     // Check if user exists and if the password is correct
-    if (!user || user.password !== password) {
-      return res.status(401).json({ message: 'Invalid username or password' });
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
     }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
 
     // Generate JWT token
     const token = generateToken(user.id);
+    const role = user.role;
+    const id = user.id;
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: 'Login successful', token, role, id });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }

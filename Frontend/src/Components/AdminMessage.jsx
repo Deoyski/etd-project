@@ -125,7 +125,7 @@ function AdminMessage() {
     <>
       <ToastContainer />
       <AdminNavbar />
-      <div className="ps-[300px] flex justify-center items-center">
+      <div className="ps-[270px] flex justify-center items-center">
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>

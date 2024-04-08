@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import MainNavbar from "./MainNavbar";
 import background from "../assets/background.png";
@@ -17,15 +17,22 @@ function formatDate(dateString) {
 }
 
 function TableHistory() {
-  const [data, setData] = useState([]);
-
-  // Fetch Data
-  useEffect(() => {
-    fetch("http://localhost:5000/history")
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch((error) => console.error(error));
-  }, []);
+    const [data, setData] = useState([]);
+    const userId2 = localStorage.getItem('id');
+    console.log("userId", userId2)
+    // Fetch Data
+    useEffect(() => {
+      fetch("http://localhost:5000/history")
+        .then((response) => response.json())
+        .then((data) => {
+          // Filter data by userId
+          console.log("data berhasil", data);
+          const filteredData = data.filter((a) => a.userId === parseInt(userId2));
+          console.log("ini data yang diambil",filteredData);
+          setData(filteredData);
+        })
+        .catch((error) => console.error(error));
+    }, [userId2]);
 
   // Search
   const [searchQuery, setSearchQuery] = useState("");
@@ -69,6 +76,17 @@ function TableHistory() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalItems = data.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // Tambahkan state lokal untuk melacak status toggle
+  const [toggleStatus, setToggleStatus] = useState({});
+
+  // Fungsi untuk mengubah status toggle
+  const toggleRow = (index) => {
+    setToggleStatus((prevStatus) => ({
+      ...prevStatus,
+      [index]: !prevStatus[index],
+    }));
+  };
 
   // Pagination controls
   const nextPage = () => {
@@ -194,6 +212,8 @@ function TableHistory() {
                     {dataToRender
                       .slice(startIndex, endIndex)
                       .map((a, index) => (
+                        <React.Fragment key={index}>
+
                         <Table.Row
                           key={index}
                           className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -212,15 +232,33 @@ function TableHistory() {
                           <Table.Cell>{a.lokasi_penemuan}</Table.Cell>
                           <Table.Cell>{a.informasi_tambahan}</Table.Cell>
                           <Table.Cell>
-                            {Object.entries(a.ciri_jenazah).map(
-                              ([key, value]) =>
-                                value
-                                  .replace(/[{}"]/g, " ")
-                                 // .replace(/[,]/g, " ")
-                            )}
+                            {/* Tambahkan button untuk toggle */}
+                            <button
+                              className="underline"
+                              onClick={() => toggleRow(index)}
+                            >
+                              {toggleStatus[index] ? "Sembunyikan" : "Lihat"}
+                            </button>
                           </Table.Cell>
                           <Table.Cell>{a.waktu_kematian}</Table.Cell>
                         </Table.Row>
+                          {toggleStatus[index] && (
+                            <Table.Row>
+                              <Table.Cell colSpan="12">
+                                <div className="pb-2 font-bold">
+                                  Ciri Jenazah :{" "}
+                                </div>
+                                {/* Tampilkan detail ciri jenazah di sini */}
+                                {a.ciri_jenazah
+                                  .slice(1, -1)
+                                  .split(",")
+                                  .map((item, index) => (
+                                    <div key={index}>{item.trim()}</div>
+                                  ))}
+                              </Table.Cell>
+                            </Table.Row>
+                          )}
+                          </React.Fragment>
                       ))}
                   </Table.Body>
                 </Table>

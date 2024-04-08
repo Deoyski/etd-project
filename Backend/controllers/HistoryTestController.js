@@ -9,6 +9,24 @@ export const getHistorys = async (req, res) => {
   }
 };
 
+export const getHistoryAllId = async (req, res) => {
+  try {
+    const userId = req.query.userId;
+    if (!userId) {
+      return res.status(400).json({ message: "userId is required" });
+    }
+
+    const response = await History.findAll({
+      where: {
+        userId: userId
+      }
+    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getHistoryById = async (req, res) => {
   try {
     const response = await History.findOne({

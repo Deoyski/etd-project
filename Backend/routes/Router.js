@@ -4,7 +4,7 @@ import { createInterval, deleteInterval, getIntervalById, getIntervals, updateIn
 import { createCiriJenazah, deleteCiriJenazah, getCiriJenazahById, getCiriJenazahs, updateCiriJenazah } from "../controllers/CiriJenazahController.js";
 import { createRuleBase, deleteRuleBase, getRuleBaseById, getRuleBases, updateRuleBase} from "../controllers/RuleBaseController.js";
 import { createMessage, deleteMessage, getMessageById, getMessages, updateMessage} from "../controllers/MessageController.js";
-import { createHistory, deleteHistory, getHistoryById, getHistorys, updateHistory } from "../controllers/HistoryTestController.js";
+import { createHistory, deleteHistory, getHistoryAllId, getHistoryById, getHistorys, updateHistory } from "../controllers/HistoryTestController.js";
 const router = express.Router();
 
 // User Router

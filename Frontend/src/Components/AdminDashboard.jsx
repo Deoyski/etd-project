@@ -1,23 +1,27 @@
 import AdminNavbar from "./AdminNavbar";
 import { Table } from "flowbite-react";
-import { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import background from "../assets/background.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalUser from "./Modal/ModalUser";
 
 function AdminDashboard() {
-  const [data, setDataHistory] = useState([]);
+  const [dataHistory, setDataHistory] = useState([]);
   const [dataCiriJenazah, setDataCiriJenazah] = useState([]);
   const [dataInterval, setDataInterval] = useState([]);
-  const [dataUser, setDataUser] = useState([]);
+  const [data, setData] = useState([]);
   const [dataRuleBase, setDataRuleBase] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
+
 
   useEffect(() => {
     getCiriJenazah();
     getInterval();
-    getUser();
     getRuleBase();
     getHistory();
+    fetchData();
   }, []);
 
   const getCiriJenazah = () => {
@@ -33,13 +37,18 @@ function AdminDashboard() {
       .then((data) => setDataInterval(data))
       .catch((error) => console.error(error));
   };
-
-  const getUser = () => {
-    fetch("http://localhost:5000/users")
-      .then((response) => response.json())
-      .then((data) => setDataUser(data))
-      .catch((error) => console.error(error));
-  };
+ // Fetch Data
+// Fetch Data
+const fetchData = () => {
+  fetch("http://localhost:5000/users")
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter out users with role "admin"
+      const filteredData = data.filter((user) => user.role !== "admin");
+      setData(filteredData);
+    })
+    .catch((error) => console.error(error));
+};
 
   const getRuleBase = () => {
     fetch("http://localhost:5000/rule-base")
@@ -65,28 +74,13 @@ function AdminDashboard() {
 
   // Filtered data based on search query
   const filteredData = data
-  ? data.filter(
-      (el) =>
-        el.no_pemeriksaan.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.inisial_nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.jenis_kelamin.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.informasi_tambahan
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        el.ciri_jenazah.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.waktu_kematian.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        String(el.tgl_pemeriksaan)
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        String(el.perkiraan_umur)
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        String(el.tgl_penemuan)
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        el.lokasi_penemuan.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  : [];
+    ? data.filter(
+        (el) =>
+        el.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        el.password.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        el.email.toLowerCase().includes(searchQuery.toLowerCase()) 
+      )
+    : [];
 
   // Data to render in the table
   const dataToRender = searchQuery ? filteredData : data;
@@ -110,14 +104,14 @@ function AdminDashboard() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
 
-  // Delete Data
-  const handleDelete = (id) => {
-    fetch(`http://localhost:5000/history/${id}`, {
+   // Delete Data
+   const handleDelete = (id) => {
+    fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
-          getHistory(); // Refetch data after successful deletion
+          fetchData(); // Refetch data after successful deletion
           toast.success("Data deleted successfully");
         } else {
           console.error("Failed to delete data");
@@ -135,26 +129,19 @@ function AdminDashboard() {
     // Prepare header row
     const headers = [
       "Nomor Pemeriksaan",
-      "Inisial Nama",   
+      "Inisial Nama",
       "Jenis Kelamin",
-      "Tanggal dan Jam Pemeriksaan",
-     "Tanggal dan Jam Penemuan",
-      "Perkiraan Umur",
-      "Lokasi Penemuan",
-      "Informasi Tambahan",      
-      "Waktu Kematian",
-      "Ciri Jenazah"
     ];
     // Prepare data rows
     const rows = dataToRender.map((row) => [
       row.no_pemeriksaan,
-      row.inisial_nama,    
+      row.inisial_nama,
       row.jenis_kelamin,
-      row.tgl_pemeriksaan,   
+      row.tgl_pemeriksaan,
       row.tgl_penemuan,
       row.perkiraan_umur,
       row.lokasi_penemuan,
-      row.informasi_tambahan,      
+      row.informasi_tambahan,
       row.waktu_kematian,
       row.ciri_jenazah,
     ]);
@@ -172,11 +159,21 @@ function AdminDashboard() {
     link.click();
   };
 
+  const handleCloseModal = () => {
+    setSelectedData(null);
+    setShowModal(false);
+  };
+
+  const handleAdd = () => {
+    setSelectedData(null);
+    setShowModal(true);
+  };
+
   return (
     <>
       <ToastContainer />
       <AdminNavbar />
-      <div className="ps-[300px] flex justify-center items-center">
+      <div className="ps-[270px] flex justify-center items-center">
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
@@ -205,9 +202,11 @@ function AdminDashboard() {
                   <div className="w-4/6 flex-col">
                     <div className=" flex-col">
                       <div className="text-[#002259] text-4xl font-bold">
-                        {dataUser.length !== null ? dataUser.length : 0}
+                        {dataHistory.length !== null ? dataHistory.length : 0}
                       </div>
-                      <div className="text-[#002259] text-lg">Total Tes</div>
+                      <div className="text-[#002259] text-lg">
+                        Total Riwayat Tes
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -255,9 +254,11 @@ function AdminDashboard() {
                   <div className="w-4/6 flex-col">
                     <div className=" flex-col">
                       <div className="text-[#002259] text-4xl font-bold">
-                        {dataCiriJenazah.length !== null ? dataCiriJenazah.length : 0}
+                        {dataCiriJenazah.length !== null
+                          ? dataCiriJenazah.length
+                          : 0}
                       </div>
-           
+
                       <div className="text-[#002259] text-lg">
                         Total Ciri Jenazah
                       </div>
@@ -297,7 +298,7 @@ function AdminDashboard() {
             <div className="w-[90%] flex justify-between items-center">
               <div className="lg:text-5xl text-4xl font-extrabold lg:flex justify-left text-left py-6">
                 <div className="text-white pr-2">Tabel</div>
-                <div className="text-[#F3B320] pr-2">Interval ETD</div>
+                <div className="text-[#F3B320] pr-2">Riwayat Tes</div>
               </div>
               <div className="flex items-center h-12 gap-3">
                 <button
@@ -306,7 +307,12 @@ function AdminDashboard() {
                 >
                   Export CSV
                 </button>
-    
+                <button
+                  onClick={handleAdd}
+                  className="bg-[#F3B320] py-3 px-6 rounded-lg text-white"
+                >
+                  + Add Data
+                </button>
               </div>
             </div>
           </div>
@@ -336,21 +342,15 @@ function AdminDashboard() {
                   />
                 </div>
               </div>
-              <div className="py-4">
-                <Table className="w-full" striped>
-                  <Table.Head>
-                    <Table.HeadCell>No</Table.HeadCell>
-                    <Table.HeadCell>No Pemeriksaan</Table.HeadCell>
-                    <Table.HeadCell>Inisial Nama</Table.HeadCell>
-                    <Table.HeadCell>Jenis Kelamin</Table.HeadCell>
-                    <Table.HeadCell>Tanggal dan Jam Pemeriksaan</Table.HeadCell>
-                    <Table.HeadCell>Tanggal dan Jam Penemuan</Table.HeadCell>
-                    <Table.HeadCell>Pesrkiraan Umur</Table.HeadCell>
-                    <Table.HeadCell>Lokasi Penemuan</Table.HeadCell>
-                    <Table.HeadCell>Informasi Tambahan</Table.HeadCell>
-                    <Table.HeadCell>Ciri Jenazah</Table.HeadCell>
-                    <Table.HeadCell>Waktu Kematian</Table.HeadCell>
-                    <Table.HeadCell>Delete</Table.HeadCell>
+              <div className="py-3">
+              <Table className="overflow-x-auto " striped hoverable>
+                  <Table.Head className="text-md">
+                    <Table.HeadCell className="w-1/12">No</Table.HeadCell>
+                    <Table.HeadCell className="w-5/12">Name</Table.HeadCell>
+                    <Table.HeadCell className="w-5/12">
+                      Email
+                    </Table.HeadCell>
+                    <Table.HeadCell className="w-1/12">Delete</Table.HeadCell>
                   </Table.Head>
                   <Table.Body className="divide-y">
                     {dataToRender
@@ -360,28 +360,16 @@ function AdminDashboard() {
                           key={index}
                           className="bg-white dark:border-gray-700 dark:bg-gray-800"
                         >
-                          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                          <Table.Cell className=" w-1/12 whitespace-nowrap font-medium text-gray-900 dark:text-white">
                             {(currentPage - 1) * itemsPerPage + index + 1}
                           </Table.Cell>
-                          <Table.Cell>{a.no_pemeriksaan}</Table.Cell>
-                          <Table.Cell>{a.inisial_nama}</Table.Cell>
-                          <Table.Cell>{a.jenis_kelamin}</Table.Cell>
-                          <Table.Cell>
-                            {formatDate(a.tgl_pemeriksaan)}
+                          <Table.Cell className="py-3 w-5/12 whitespace-nowrap">
+                            {a.username}
                           </Table.Cell>
-                          <Table.Cell>{formatDate(a.tgl_penemuan)}</Table.Cell>
-                          <Table.Cell>{a.perkiraan_umur} tahun</Table.Cell>
-                          <Table.Cell>{a.lokasi_penemuan}</Table.Cell>
-                          <Table.Cell>{a.informasi_tambahan}</Table.Cell>
-                          <Table.Cell>
-                            {Object.entries(a.ciri_jenazah).map(
-                              ([key, value]) =>
-                                value
-                                  .replace(/[{}"]/g, " ")
-                                 // .replace(/[,]/g, " ")
-                            )}
+                          <Table.Cell className="py-3 w-5/12 whitespace-nowrap">
+                            {a.email}
                           </Table.Cell>
-                          <Table.Cell>{a.waktu_kematian}</Table.Cell>
+                          
                           <Table.Cell className="py-3 w-1/12 whitespace-nowrap ">
                             <button
                               onClick={() => handleDelete(a.id)}
@@ -439,21 +427,17 @@ function AdminDashboard() {
           </div>
         </div>
       </div>
+      {showModal && (
+        <ModalUser
+          closeModal={handleCloseModal}
+          selectedData={selectedData}
+          fetchData={fetchData}
+        />
+      )}
     </>
   );
 }
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  };
-  const formattedDate = date.toLocaleDateString("id-ID", options);
-  return formattedDate.replace("pukul", ",");
-}
+
 
 export default AdminDashboard;
