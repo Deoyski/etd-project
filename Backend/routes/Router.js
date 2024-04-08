@@ -1,11 +1,10 @@
 import express from "express";
-import { createUser, deleteUser, getUserById, getUsers, updateUser } from "../controllers/UserController.js";
+import { createUser, deleteUser, getUserById, getUsers, login, updateUser } from "../controllers/UserController.js";
 import { createInterval, deleteInterval, getIntervalById, getIntervals, updateInterval } from "../controllers/IntervalController.js";
 import { createCiriJenazah, deleteCiriJenazah, getCiriJenazahById, getCiriJenazahs, updateCiriJenazah } from "../controllers/CiriJenazahController.js";
 import { createRuleBase, deleteRuleBase, getRuleBaseById, getRuleBases, updateRuleBase} from "../controllers/RuleBaseController.js";
 import { createMessage, deleteMessage, getMessageById, getMessages, updateMessage} from "../controllers/MessageController.js";
 import { createHistory, deleteHistory, getHistoryById, getHistorys, updateHistory } from "../controllers/HistoryTestController.js";
-
 const router = express.Router();
 
 // User Router
@@ -14,6 +13,7 @@ router.get("/users/:id", getUserById);
 router.post("/users", createUser);
 router.patch("/users/:id", updateUser);
 router.delete("/users/:id", deleteUser);
+router.post('/login', login);
 
 // Interval Router
 router.get("/interval", getIntervals);
