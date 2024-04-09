@@ -25,7 +25,8 @@ function Login() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.role);
         localStorage.setItem('id', data.id);
-        console.log('Login berhasil ini id' , data.id);
+        localStorage.setItem('username', data.username);
+        console.log(data.username);
         // Redirect sesuai dengan role
         if (data.role === 'admin') {
           window.location.href = '/admin_dashboard';

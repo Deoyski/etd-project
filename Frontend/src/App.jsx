@@ -9,7 +9,6 @@ import TableCiriJenazah from "./Components/TableCiriJenazah";
 import AdminDashboard from "./Components/AdminDashboard";
 import AdminTableInterval from "./Components/AdminInterval";
 import AdminCiriJenazah from "./Components/AdminCiriJenazah";
-import AdminUserTable from "./Components/AdminUserTable";
 import AdminRuleBase from "./Components/AdminRuleBase";
 import AdminMessage from "./Components/AdminMessage";
 import Message from "./Components/Message";
@@ -46,7 +45,6 @@ function App() {
             <Route path="/admin_tbl_interval" element={<AdminTableInterval/>} />
             <Route path="/admin_tbl_ciri" element={<AdminCiriJenazah/>} />
             <Route path="/admin_rule_base" element={<AdminRuleBase/>} />
-            <Route path="/admin_tbl_user" element={<AdminUserTable/>} />
             <Route path="/admin_tbl_message" element={<AdminMessage/>} />
             <Route path="/admin_tbl_riwayat" element={<AdminRiwayat/>} />
           </>

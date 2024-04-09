@@ -14,6 +14,7 @@ function Question() {
   const [answers, setAnswers] = useState([]); // Menyimpan jawaban pengguna
   const [questions, setQuestions] = useState([]); // Menyimpan pertanyaan
   const [answerCodes, setAnswerCodes] = useState([]);
+  const [answerP, setAnswerP] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -30,16 +31,16 @@ function Question() {
       .then((ciriJenazahData) => {
         const filteredQuestions = ciriJenazahData.filter(
           (question) =>
-            question.kode === "P5" ||
-            question.kode === "P6" ||
-            question.kode === "P23" ||
-            question.kode === "P34" ||
-            question.kode === "P7"
+            question.kode === "C5" ||
+            question.kode === "C6" ||
+            question.kode === "C23" ||
+            question.kode === "C34" ||
+            question.kode === "C7"
         );
         // Mengurutkan pertanyaan berdasarkan urutan yang diinginkan
         const sortedQuestions = filteredQuestions.sort((a, b) => {
           // Menetapkan urutan keluar pertanyaan
-          const order = { P5: 0, P6: 1, P7: 2, P23: 3, P34: 4 };
+          const order = { C5: 0, C6: 1, C7: 2, C23: 3, C34: 4 };
           return order[a.kode] - order[b.kode];
         });
         // Set pertanyaan yang sudah difilter dan diurutkan ke dalam state
@@ -54,11 +55,13 @@ function Question() {
       answer ? "IYA" : "TIDAK"
     }`;
     const answerCode = currentQuestion.id; // Mendapatkan kode pertanyaan
-
+    const answerP = currentQuestion.kode; // Mendapatkan kode pertanyaan
+    console.log(answerP);
     if (answer) {
     
         setAnswerCodes([...answerCodes, answerCode]);
         setAnswers([...answers, answerText]);
+        setAnswerP([...answerP, answerP]);
 
     } else {
       setAnswers([...answers, answerText]);
@@ -70,76 +73,79 @@ function Question() {
     } else if (!additionalQuestionsFetched) {
       // Mengambil jawaban empat pertanyaan sebelumnya
       const previousAnswers = answers.slice(Math.max(0, questionIndex - 4));
-      console.log("Jawaban sebelumnya:", previousAnswers);
+      // console.log("Jawaban sebelumnya:", previousAnswers);
 
-      const P5_Yes = previousAnswers
-        .filter((_, index) => questions[index].kode === "P5")
+      const C5_Yes = previousAnswers
+        .filter((_, index) => questions[index].kode === "C5")
         .every((answer) => answer.endsWith("IYA"));
-      const P6_Yes = previousAnswers
-        .filter((_, index) => questions[index].kode === "P6")
+      const C6_Yes = previousAnswers
+        .filter((_, index) => questions[index].kode === "C6")
         .every((answer) => answer.endsWith("IYA"));
-      const P7_Yes = previousAnswers
-        .filter((_, index) => questions[index].kode === "P7")
+      const C7_Yes = previousAnswers
+        .filter((_, index) => questions[index].kode === "C7")
         .every((answer) => answer.endsWith("IYA"));
-      const P23_Yes = previousAnswers
-        .filter((_, index) => questions[index].kode === "P23")
+      const C23_Yes = previousAnswers
+        .filter((_, index) => questions[index].kode === "C23")
         .every((answer) => answer.endsWith("IYA"));
 
-      const P5_No = previousAnswers
-        .filter((_, index) => questions[index].kode === "P5")
+      const C5_No = previousAnswers
+        .filter((_, index) => questions[index].kode === "C5")
         .every((answer) => answer.endsWith("TIDAK"));
-      const P6_No = previousAnswers
-        .filter((_, index) => questions[index].kode === "P6")
+      const C6_No = previousAnswers
+        .filter((_, index) => questions[index].kode === "C6")
         .every((answer) => answer.endsWith("TIDAK"));
-      const P7_No = previousAnswers
-        .filter((_, index) => questions[index].kode === "P7")
+      const C7_No = previousAnswers
+        .filter((_, index) => questions[index].kode === "C7")
         .every((answer) => answer.endsWith("TIDAK"));
-      const P23_No = previousAnswers
-        .filter((_, index) => questions[index].kode === "P23")
+      const C23_No = previousAnswers
+        .filter((_, index) => questions[index].kode === "C23")
         .every((answer) => answer.endsWith("TIDAK"));
 
-      if (P6_Yes && P7_Yes && P5_No && P23_No) {
+      if (C6_Yes && C7_Yes && C5_No && C23_No) {
         fetchAdditionalQuestions([
-          "P1",
-          "P2",
-          "P3",
-          "P9",
-          "P10",
-          "P17",
-          "P18",
-          "P35",
+          "C1",
+          "C2",
+          "C3",
+          "C9",
+          "C10",
+          "C17",
+          "C18",
+          "C35",
         ]);
-      } else if (P5_Yes && P6_No && P7_No && P23_No) {
+      } else if (C5_Yes && C6_No && C7_No && C23_No) {
         fetchAdditionalQuestions([
-          "P8",
-          "P12",
-          "P16",
-          "P20",
-          "P22",
-          "P26",
-          "P32",
-          "P33",
-          "P35",
+          "C8",
+          "C12",
+          "C16",
+          "C20",
+          "C22",
+          "C26",
+          "C32",
+          "C33",
+          "C35",
         ]);
-      } else if (P5_Yes && P6_No && P7_Yes && P23_No) {
-        fetchAdditionalQuestions(["P11", "P19", "P21", "P22", "P35"]);
-      } else if (P5_Yes && P23_Yes && P6_No && P7_No) {
+      } else if (C5_Yes && C6_No && C7_Yes && C23_No) {
+        fetchAdditionalQuestions(["C11", "C19", "C21", "C22", "C35"]);
+      } else if (C5_Yes && C23_Yes && C6_No && C7_No) {
         fetchAdditionalQuestions([
-          "P13",
-          "P14",
-          "P15",
-          "P24",
-          "P25",
-          "P26",
-          "P27",
-          "P28",
-          "P29",
-          "P30",
-          "P31",
-          "P35",
+          "C13",
+          "C14",
+          "C15",
+          "C24",
+          "C25",
+          "C26",
+          "C27",
+          "C28",
+          "C29",
+          "C30",
+          "C31",
+          "C35",
         ]);
-      } else if (P5_No && P6_No && P7_Yes && P23_No) {
-        fetchAdditionalQuestions(["P3", "P4", "P10", "P11", "P18", "P35"]);
+      } else if (C5_No && C6_No && C7_Yes && C23_No) {
+        fetchAdditionalQuestions(["C3", "P4", "C10", "C11", "C18", "C35"]);
+      } else {
+      navigateToTestResult();
+
       }
     } else {
       navigateToTestResult();
@@ -168,6 +174,7 @@ function Question() {
         formData: formData,
         answers: answers,
         answerCodes: answerCodes,
+        answerP: answerP
       },
     });
   };

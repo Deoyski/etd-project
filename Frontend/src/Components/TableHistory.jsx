@@ -19,7 +19,7 @@ function formatDate(dateString) {
 function TableHistory() {
     const [data, setData] = useState([]);
     const userId2 = localStorage.getItem('id');
-    console.log("userId", userId2)
+    
     // Fetch Data
     useEffect(() => {
       fetch("http://localhost:5000/history")
