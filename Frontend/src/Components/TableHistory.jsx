@@ -152,7 +152,7 @@ function TableHistory() {
         </div>
         <div className="container relative flex-col justify-center w-screen pt-10">
           <div className="flex justify-center">
-            <div className="w-[80%] flex justify-between items-center">
+            <div className="w-[90%] flex justify-between items-center">
               <div className="lg:text-5xl text-4xl font-extrabold lg:flex justify-left text-left py-4">
                 <div className="text-white pr-2">Test</div>
                 <div className="text-[#F3B320]"> History</div>

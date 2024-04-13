@@ -86,7 +86,7 @@ function TableInterval() {
             <div className="w-[80%] flex justify-between items-center">
               <div className="lg:text-5xl text-4xl font-extrabold lg:flex justify-left text-left py-4">
                 <div className="text-white pr-2">Table </div>
-                <div className="text-[#F3B320]"> ETD</div>
+                <div className="text-[#F3B320]">Interval ETD</div>
               </div>
               <div className="flex items-center h-12">
                 <button
