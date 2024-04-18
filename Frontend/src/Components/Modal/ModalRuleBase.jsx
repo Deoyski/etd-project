@@ -49,8 +49,8 @@ function ModalRuleBase({ closeModal, selectedData, fetchData, dataInterval, data
     <>
 
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
-        <div className="bg-white rounded-lg p-8">
-          <h2 className="text-2xl mb-4">
+        <div className="bg-white w-4/12 rounded-lg p-8">
+          <h2 className="text-2xl font-semibold mb-4">
             {selectedData ? "Edit Data" : "Add Data"}
           </h2>
           <form onSubmit={handleSubmit}>
@@ -104,7 +104,7 @@ function ModalRuleBase({ closeModal, selectedData, fetchData, dataInterval, data
               </button>
               <button
                 type="submit"
-                className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
+                className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
               >
                 Save
               </button>

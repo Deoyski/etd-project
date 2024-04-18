@@ -274,7 +274,7 @@ function AdminRiwayat() {
                                 className="underline"
                                 onClick={() => toggleRow(index)}
                               >
-                                {toggleStatus[index] ? "Sembunyikan" : "Lihat"}
+                                {toggleStatus[index] ? "Hide" : "Show"}
                               </button>
                             </Table.Cell>
                             <Table.Cell className="py-3 w-1/12 whitespace-nowrap ">
@@ -320,7 +320,7 @@ function AdminRiwayat() {
                         </React.Fragment>
                       ))}
                   </Table.Body>
-                  ;
+                  
                 </Table>
               </div>
 

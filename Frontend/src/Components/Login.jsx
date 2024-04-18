@@ -3,7 +3,7 @@ import { Button, Label, TextInput } from "flowbite-react";
 import background from "../assets/background.png";
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
@@ -15,7 +15,7 @@ function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: username, password: password }),
+        body: JSON.stringify({ email: email, password: password }),
       });
       const data = await response.json();
       // Cek apakah login berhasil
@@ -48,7 +48,7 @@ function Login() {
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
-        <div className="container relative flex-col lg:w-[40%] w-[60%] h-[50%] flex justify-center text-center">
+        <div className="container relative flex-col lg:w-[40%] w-[60%] h-[45%] flex justify-center text-center">
           <div className=" bg-white flex-col h-full p-10 rounded-3xl lg:px-16 shadow-xl">
             <div className="lg:text-7xl text-6xl font-extrabold lg:flex justify-center text-center text-[#002259]">
               Login ETD
@@ -56,16 +56,16 @@ function Login() {
             <form className="flex justify-start flex-col gap-4 text-start pt-10 text-xl" onSubmit={handleLogin}>
               <div>
                 <div className="mb-2 ">
-                  <Label htmlFor="email2" value="Username" />
+                  <Label htmlFor="email2" value="Email" />
                 </div>
                 <TextInput
                   id="email2"
                   type="email"
-                  placeholder="Masukkan username"
+                  placeholder="Masukkan gmail"
                   required
                   shadow
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
                 />
               </div>
               <div>

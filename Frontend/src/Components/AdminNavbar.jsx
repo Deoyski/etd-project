@@ -69,7 +69,7 @@ function AdminNavbar() {
               to="/admin_rule_base"
               onClick={() => handleLinkClick('/admin_rule_base')}
             >
-              Rule Base
+              Tabel Rule Base
             </Link>
             <Link
               className={`${activeLink === '/admin_tbl_riwayat' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
@@ -83,7 +83,7 @@ function AdminNavbar() {
               to="/admin_tbl_message"
               onClick={() => handleLinkClick('/admin_tbl_message')}
             >
-              Tabel message
+              Tabel Message
             </Link>
             <button
               className={`text-left ${logoutActive ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}

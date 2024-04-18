@@ -7,6 +7,20 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactToPrint from "react-to-print";
 
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false, 
+    timeZone: "Asia/Jakarta"
+  };
+  const formattedDate = date.toLocaleString("id-ID", options);
+  return formattedDate.replace("pukul", ",");
+}
 function TestResult() {
   const location = useLocation();
   const userId = localStorage.getItem("id");
@@ -164,7 +178,7 @@ function TestResult() {
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
-        <div className="container relative flex-col lg:w-[68%] w-[85%] h-[80%] flex justify-center">
+        <div className="container relative flex-col lg:w-[68%] w-[85%] h-[72%] flex justify-center">
           <div className=" bg-white flex-col h-full rounded-3xl items-center overflow-y-auto shadow-xl">
             <div className=" flex justify-between pt-10 lg:px-16 px-10">
               <div className="text-4xl font-extrabold lg:flex   text-[#002259]">
@@ -200,7 +214,7 @@ function TestResult() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <p className="font-bold">Tanggal Jam Pemeriksaan</p>
-                    <p className="text-gray-500">{formData.tgl_pemeriksaan}</p>
+                    <p className="text-gray-500">{formatDate(formData.tgl_pemeriksaan)} WIB</p>
                   </div>
                   <div className="flex flex-col gap-1">
                     <p className="font-bold">Inisial Nama Jenazah</p>
@@ -218,7 +232,7 @@ function TestResult() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <p className="font-bold">Tanggal dan Jam Penemuan</p>
-                    <p className="text-gray-500">{formData.tgl_penemuan}</p>
+                    <p className="text-gray-500">{formatDate(formData.tgl_penemuan)} WIB</p>
                   </div>
                   <div className="flex flex-col gap-1 ">
                     <p className="font-bold">Lokasi Penemuan</p>

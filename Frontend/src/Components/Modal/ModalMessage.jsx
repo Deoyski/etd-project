@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
+function ModalMessage({ closeModal, selectedData, fetchData }) {
   const [formData, setFormData] = useState({
-    kode: "",
-    keterangan: "",
+    name: "",
+    email: "",
+    phone: "",
+    desc: "",
   });
 
   useEffect(() => {
@@ -24,8 +26,8 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const apiUrl = selectedData
-      ? `http://localhost:5000/ciri-jenazah/${selectedData.id}`
-      : "http://localhost:5000/ciri-jenazah";
+      ? `http://localhost:5000/message/${selectedData.id}`
+      : "http://localhost:5000/message";
 
     fetch(apiUrl, {
       method: selectedData ? "PATCH" : "POST",
@@ -63,22 +65,22 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
 
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white rounded-lg p-8">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl mb-4">
             {selectedData ? "Edit Data" : "Add Data"}
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
-                htmlFor="kode"
+                htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Kode
+                name
               </label>
               <input
                 type="text"
-                id="kode"
-                name="kode"
-                value={formData.kode}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                 required
@@ -86,16 +88,50 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="keterangan"
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Keterangan
+                email
               </label>
               <input
                 type="text"
-                id="keterangan"
-                name="keterangan"
-                value={formData.keterangan}
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-gray-700"
+              >
+                phone
+              </label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="desc"
+                className="block text-sm font-medium text-gray-700"
+              >
+                desc
+              </label>
+              <input
+                type="text"
+                id="desc"
+                name="desc"
+                value={formData.desc}
                 onChange={handleChange}
                 className="mt-1 p-2 border border-gray-300 rounded-md w-full"
                 required
@@ -111,7 +147,7 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
               </button>
               <button
                 type="submit"
-                className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
+                className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
               >
                 Save
               </button>
@@ -123,4 +159,4 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
   );
 }
 
-export default ModalCiriJenazah;
+export default ModalMessage;

@@ -198,7 +198,7 @@ function CorpseData() {
               </div>
                <div className="flex justify-end">
                   <button
-                    className="bg-[#F3B320] mt-6 lg:px-12 px-6 py-1"
+                    className="bg-[#F3B320] rounded-md hover:bg-[#002259] text-white mt-6 lg:px-12 px-7 py-2"
                     type="submit"
                   >
                     Next

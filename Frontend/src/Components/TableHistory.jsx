@@ -154,8 +154,8 @@ function TableHistory() {
           <div className="flex justify-center">
             <div className="w-[90%] flex justify-between items-center">
               <div className="lg:text-5xl text-4xl font-extrabold lg:flex justify-left text-left py-4">
-                <div className="text-white pr-2">Test</div>
-                <div className="text-[#F3B320]"> History</div>
+                <div className="text-white pr-2">Table</div>
+                <div className="text-[#F3B320]">Test History</div>
               </div>
               <div className="flex items-center h-12">
                 <button
@@ -205,8 +205,7 @@ function TableHistory() {
                     <Table.HeadCell>Pesrkiraan Umur</Table.HeadCell>
                     <Table.HeadCell>Lokasi Penemuan</Table.HeadCell>
                     <Table.HeadCell>Informasi Tambahan</Table.HeadCell>
-                    <Table.HeadCell>Ciri Jenazah</Table.HeadCell>
-                    <Table.HeadCell>Waktu Kematian</Table.HeadCell>
+                    <Table.HeadCell>Ciri Jenazah & Waktu Kematian</Table.HeadCell>
                   </Table.Head>
                   <Table.Body className="divide-y">
                     {dataToRender
@@ -225,9 +224,9 @@ function TableHistory() {
                           <Table.Cell>{a.inisial_nama}</Table.Cell>
                           <Table.Cell>{a.jenis_kelamin}</Table.Cell>
                           <Table.Cell>
-                            {formatDate(a.tgl_pemeriksaan)}
+                            {formatDate(a.tgl_pemeriksaan)} WIB
                           </Table.Cell>
-                          <Table.Cell>{formatDate(a.tgl_penemuan)}</Table.Cell>
+                          <Table.Cell>{formatDate(a.tgl_penemuan)} WIB</Table.Cell>
                           <Table.Cell>{a.perkiraan_umur} tahun</Table.Cell>
                           <Table.Cell>{a.lokasi_penemuan}</Table.Cell>
                           <Table.Cell>{a.informasi_tambahan}</Table.Cell>
@@ -237,10 +236,10 @@ function TableHistory() {
                               className="underline"
                               onClick={() => toggleRow(index)}
                             >
-                              {toggleStatus[index] ? "Sembunyikan" : "Lihat"}
+                              {toggleStatus[index] ? "HIde" : "Show"}
                             </button>
                           </Table.Cell>
-                          <Table.Cell>{a.waktu_kematian}</Table.Cell>
+                   
                         </Table.Row>
                           {toggleStatus[index] && (
                             <Table.Row>
@@ -255,6 +254,9 @@ function TableHistory() {
                                   .map((item, index) => (
                                     <div key={index}>{item.trim()}</div>
                                   ))}
+                                        <div className="my-2 pt-2 font-bold border-t-2">
+                                  Waktu Kematian : {a.waktu_kematian}
+                                </div>
                               </Table.Cell>
                             </Table.Row>
                           )}

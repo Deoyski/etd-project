@@ -5,7 +5,7 @@ import background from "../assets/background.png";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ModalInterval from "./Modal/ModalInterval";
+import ModalMessage from "./Modal/ModalMessage";
 
 function AdminMessage() {
   // const dispatch = useDispatch();
@@ -60,8 +60,8 @@ function AdminMessage() {
         (el) =>
         el.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         String(el.phone).toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        el.email.toLowerCase().includes(searchQuery.toLowerCase()) 
+        el.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        el.desc.toLowerCase().includes(searchQuery.toLowerCase()) 
       )
     : [];
 
@@ -90,9 +90,9 @@ function AdminMessage() {
   // Export CSV
   const exportToCsv = () => {
     // Prepare header row
-    const headers = ["Kode", "Keterangan"];
+    const headers = ["Name", "Email", "Phone", "Desc"];
     // Prepare data rows
-    const rows = dataToRender.map((row) => [row.kode, row.keterangan]);
+    const rows = dataToRender.map((row) => [row.name, row.email, row.phone, row.desc]);
 
     // Combine header and data rows
     const csvContent =
@@ -102,7 +102,7 @@ function AdminMessage() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "ciri_jenazah_data.csv");
+    link.setAttribute("download", "tbl_message.csv");
     document.body.appendChild(link);
     link.click();
   };
@@ -114,11 +114,6 @@ function AdminMessage() {
   const handleCloseModal = () => {
     setSelectedData(null);
     setShowModal(false);
-  };
-
-  const handleAdd = () => {
-    setSelectedData(null);
-    setShowModal(true);
   };
 
   return (
@@ -295,7 +290,7 @@ function AdminMessage() {
         </div>
       </div>
       {showModal && (
-        <ModalInterval
+        <ModalMessage
           closeModal={handleCloseModal}
           selectedData={selectedData}
           fetchData={fetchData}

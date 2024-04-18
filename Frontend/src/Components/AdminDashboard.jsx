@@ -298,7 +298,7 @@ const fetchData = () => {
             <div className="w-[90%] flex justify-between items-center">
               <div className="lg:text-5xl text-4xl font-extrabold lg:flex justify-left text-left py-6">
                 <div className="text-white pr-2">Tabel</div>
-                <div className="text-[#F3B320] pr-2">Riwayat Tes</div>
+                <div className="text-[#F3B320] pr-2">Pengguna</div>
               </div>
               <div className="flex items-center h-12 gap-3">
                 <button
