@@ -106,8 +106,7 @@ function ModalRuleBase({ closeModal, selectedData, fetchData, dataInterval, data
                 type="submit"
                 className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
               >
-                Save
-              </button>
+{selectedData ? "Save" : "Submit"}              </button>
             </div>
           </form>
         </div>

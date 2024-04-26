@@ -56,12 +56,12 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/login
+POST http://localhost:5000/
 Content-Type: application/json
 
 {
-    "email": "user1@gmail.com",
-    "password": "user1"
+    "email": "user@gmail.com",
+    "password": "user123"
 }
 
 ###
@@ -70,7 +70,7 @@ Content-Type: application/json
 
 {
     "intervalId": 1,
-    "cirijenazahId": 1
+    "ciriJenazahId": 6
 }
 
 ### 

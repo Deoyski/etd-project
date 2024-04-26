@@ -142,7 +142,7 @@ function Question() {
           "C35",
         ]);
       } else if (C5_No && C6_No && C7_Yes && C23_No) {
-        fetchAdditionalQuestions(["C3", "P4", "C10", "C11", "C18", "C35"]);
+        fetchAdditionalQuestions(["C3", "C4", "C10", "C11", "C18", "C35"]);
       } else {
       navigateToTestResult();
 

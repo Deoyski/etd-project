@@ -116,23 +116,25 @@ function AdminRuleBase() {
   // Calculate start and end index for displaying items
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-
-  // Export CSV
   const exportToCsv = () => {
     // Prepare header row
-    const headers = ["intervalId", "ciriJenazahId"];
+    const headers = ["Interval Kode", "Interval Keterangan", "Ciri Jenazah Kode", "Ciri Jenazah Keterangan"];
     // Prepare data rows
-    const rows = dataToRender.map((row) => [row.intervalId, row.ciriJenazahId]);
-
+    const rows = dataToRender.map((row) => {
+      const interval = dataInterval.find(item => item.id === row.intervalId);
+      const ciriJenazah = dataCiriJenazah.find(item => item.id === row.ciriJenazahId);
+      return [interval.kode, interval.keterangan, ciriJenazah.kode, ciriJenazah.keterangan];
+    });
+  
     // Combine header and data rows
     const csvContent =
       "data:text/csv;charset=utf-8," +
       [headers, ...rows].map((row) => row.join(",")).join("\n");
-
+  
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "ciri_jenazah_data.csv");
+    link.setAttribute("download", "rule_base_data.csv");
     document.body.appendChild(link);
     link.click();
   };

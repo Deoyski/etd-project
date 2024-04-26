@@ -91,7 +91,7 @@ function Message() {
               </div>
               <TextInput
                 id="phone"
-                type="text"
+                type="number"
                 placeholder="Enter phone number"
                 required
                 shadow

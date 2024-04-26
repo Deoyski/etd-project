@@ -138,7 +138,7 @@ function TableHistory() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "interval_waktu_saat_kematian_data.csv");
+    link.setAttribute("download", "test_history.csv");
     document.body.appendChild(link);
     link.click();
   };

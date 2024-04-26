@@ -283,7 +283,7 @@ function TestResult() {
             <div className="flex items-center justify-center py-6 w-full lg:px-16 px-10">
               <Link
                 className="bg-[#F3B320] w-full text-white text-center py-3 px-4 rounded"
-                to="/"
+                to="/home"
               >
                 Kembali ke Home
               </Link>

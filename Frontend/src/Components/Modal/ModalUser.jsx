@@ -7,6 +7,7 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
     username: "",
     email: "",
     password: "",
+    role: "",
   });
 
   useEffect(() => {
@@ -22,6 +23,13 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
     });
   };
 
+  const handleRoleChange = (e) => {
+    setFormData({
+      ...formData,
+      role: e.target.value,
+    });
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const apiUrl = selectedData
@@ -119,6 +127,24 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
                 required
               />
             </div>
+            <div className="mb-4">
+              <label
+                htmlFor="role"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Role
+              </label>
+              <select
+                id="role"
+                name="role"
+                value={formData.role}
+                onChange={handleRoleChange}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
             <div className="flex justify-end">
               <button
                 type="button"
@@ -129,9 +155,9 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
               </button>
               <button
                 type="submit"
-                className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
+                className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
               >
-                Save
+                {selectedData ? "Save" : "Submit"}{" "}
               </button>
             </div>
           </form>

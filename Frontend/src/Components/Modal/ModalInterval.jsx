@@ -111,9 +111,9 @@ function ModalInterval({ closeModal, selectedData, fetchData }) {
               </button>
               <button
                 type="submit"
-                className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 rounded-md"
+                className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
               >
-                Save
+                {selectedData ? "Save" : "Submit"}{" "}
               </button>
             </div>
           </form>

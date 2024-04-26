@@ -1,6 +1,6 @@
 import AdminNavbar from "./AdminNavbar";
 import { Table } from "flowbite-react";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import background from "../assets/background.png";
 import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -147,8 +147,10 @@ function AdminRiwayat() {
       "Waktu Kematian",
       "Ciri Jenazah",
     ];
-    // Prepare data rows
-    const rows = dataToRender.map((row) => [
+      // Prepare data rows
+  const rows = dataToRender.map((row) => {
+    let ciriJenazah = Array.isArray(row.ciri_jenazah) ? row.ciri_jenazah.join(", ") : row.ciri_jenazah;
+    return [
       row.no_pemeriksaan,
       row.inisial_nama,
       row.jenis_kelamin,
@@ -158,9 +160,9 @@ function AdminRiwayat() {
       row.lokasi_penemuan,
       row.informasi_tambahan,
       row.waktu_kematian,
-      row.ciri_jenazah,
-    ]);
-
+      ciriJenazah,
+    ];
+  });
     // Combine header and data rows
     const csvContent =
       "data:text/csv;charset=utf-8," +

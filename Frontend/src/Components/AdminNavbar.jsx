@@ -18,7 +18,7 @@ function AdminNavbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     // Redirect ke halaman login
-    navigate("/login");
+    navigate("/");
   };
 
   const handleLinkClick = (link) => {
@@ -85,6 +85,13 @@ function AdminNavbar() {
             >
               Tabel Message
             </Link>
+            <Link
+              className={`${activeLink === '/admin_tbl_user' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
+              to="/admin_tbl_user"
+              onClick={() => handleLinkClick('/admin_tbl_user')}
+            >
+              Tabel User
+            </Link>
             <button
               className={`text-left ${logoutActive ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
               onClick={() => { handleLogout(); setLogoutActive(true); }} // Set logoutActive ke true saat tombol diklik
@@ -117,8 +124,9 @@ function AdminNavbar() {
           <Link to="/admin_tbl_interval">Tabel Interval ETD</Link>
           <Link to="/admin_tbl_ciri">Tabel Ciri Jenazah</Link>
           <Link to="/admin_rule_base">Rule Base</Link>
-          <Link to="/admin_tbl_riwayat">Table Riwayat</Link>
-          <Link to="/admin_rule_message">Table Message</Link>
+          <Link to="/admin_tbl_riwayat">Tabel Riwayat Tes</Link>
+          <Link to="/admin_tbl_message">Tabel Message</Link>
+          <Link to="/admin_tbl_user">Tabel User</Link>
           <button className="text-left" onClick={handleLogout}>
             Log Out
           </button>

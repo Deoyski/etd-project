@@ -17,7 +17,7 @@ function MainNavbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     // Redirect ke halaman login
-    navigate("/login");
+    navigate("/");
   };
 
   const handleLinkClick = (link) => {
@@ -38,13 +38,13 @@ function MainNavbar() {
           </div>
           <div
             className={`lg:flex ${
-              isMenuOpen ? "" : "hidden"
+              isMenuOpen ? "hidden" : "hidden"
             } gap-8 text-white text-lg items-center`}
           >
             <Link
-              to="/"
-              className={`${activeLink === '/' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
-              onClick={() => handleLinkClick('/')}
+              to="/home"
+              className={`${activeLink === '/home' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
+              onClick={() => handleLinkClick('/home')}
             >
               Home
             </Link>
@@ -54,20 +54,6 @@ function MainNavbar() {
               onClick={() => handleLinkClick('/tbl_history')}
             >
               Test History
-            </Link>
-            <Link
-              to="/tbl_interval"
-              className={`${activeLink === '/tbl_interval' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
-              onClick={() => handleLinkClick('/tbl_interval')}
-            >
-              ETD
-            </Link>
-            <Link
-              to="/tbl_ciri"
-              className={`${activeLink === '/tbl_ciri' ? 'font-bold text-yellow-300' : 'hover:text-yellow-300'}`}
-              onClick={() => handleLinkClick('/tbl_ciri')}
-            >
-              Ciri Jenazah
             </Link>
             <Link
               to="/message"
@@ -105,10 +91,8 @@ function MainNavbar() {
       </div>
       {isMenuOpen && (
         <div className="lg:hidden gap-2 absolute z-10 top-20 right-0 left-0 bg-[#002259] text-white text-lg flex flex-col items-center px-10 py-2">
-          <Link to="/" onClick={() => handleLinkClick('/')}>Home</Link>
+          <Link to="/home" onClick={() => handleLinkClick('/home')}>Home</Link>
           <Link to="/tbl_history" onClick={() => handleLinkClick('/tbl_history')}>Test History</Link>
-          <Link to="/tbl_interval" onClick={() => handleLinkClick('/tbl_interval')}>ETD</Link>
-          <Link to="/tbl_ciri" onClick={() => handleLinkClick('/tbl_ciri')}>Ciri Jenazah</Link>
           <Link to="/message" onClick={() => handleLinkClick('/message')}>Contact Doctor</Link>
           <div className="text-center border rounded-md px-6 py-1">
             <button onClick={handleLogout}>Log Out</button>

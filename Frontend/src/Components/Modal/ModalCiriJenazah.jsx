@@ -46,9 +46,7 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
         } else {
           console.error("Error");
           toast.error(
-            selectedData
-              ? "Failed to update data"
-              : "Failed to add data"
+            selectedData ? "Failed to update data" : "Failed to add data"
           );
         }
       })
@@ -60,7 +58,6 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
 
   return (
     <>
-
       <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div className="bg-white rounded-lg p-8">
           <h2 className="text-2xl font-semibold mb-4">
@@ -113,7 +110,7 @@ function ModalCiriJenazah({ closeModal, selectedData, fetchData }) {
                 type="submit"
                 className="py-2 px-4 bg-[#f3b420] text-white hover:bg-[#002259] rounded-md"
               >
-                Save
+                {selectedData ? "Save" : "Submit"}{" "}
               </button>
             </div>
           </form>
