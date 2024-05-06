@@ -65,7 +65,7 @@ function AdminDashboard() {
   return (
     <>
       <AdminNavbar />
-      <div className="ps-[270px] flex justify-center items-center">
+      <div className="lg:ps-[270px] md:ps-[270px] flex justify-center items-center">
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>

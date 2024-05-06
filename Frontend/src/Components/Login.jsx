@@ -48,7 +48,7 @@ function Login() {
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
-        <div className="container relative flex-col lg:w-[40%] w-[60%] h-[45%] flex justify-center text-center">
+        <div className="container relative flex-col lg:w-[40%] w-[80%] lg:h-[47%] flex justify-center text-center">
           <div className=" bg-white flex-col h-full p-10 rounded-3xl lg:px-16 shadow-xl">
             <div className="lg:text-7xl text-6xl font-extrabold justify-center text-center text-[#002259]">
               Login ETD

@@ -90,7 +90,7 @@ function MainNavbar() {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="lg:hidden gap-2 absolute z-10 top-20 right-0 left-0 bg-[#002259] text-white text-lg flex flex-col items-center px-10 py-2">
+        <div className="lg:hidden gap-2 absolute z-10 lg:top-20 top-10 right-0 left-0 bg-[#002259] text-white text-lg flex flex-col items-center px-10 py-2">
           <Link to="/home" onClick={() => handleLinkClick('/home')}>Home</Link>
           <Link to="/tbl_history" onClick={() => handleLinkClick('/tbl_history')}>Test History</Link>
           <Link to="/message" onClick={() => handleLinkClick('/message')}>Contact Doctor</Link>

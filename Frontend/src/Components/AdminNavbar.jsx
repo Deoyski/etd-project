@@ -33,14 +33,14 @@ function AdminNavbar() {
 
   return (
     <>
-      <div className="absolute z-10 bg-[rgb(0,34,89)] top-0 bottom-0 left-0 p-10 w-[270px] h-screen">
-        <div className="container  flex flex-col items-start">
+      <div className="absolute z-10 bg-[rgb(0,34,89)] top-0 bottom-0 left-0 lg:p-10 lg:w-[270px] h-screen">
+        <div className="container flex flex-col items-start">
           <div className="">
             <img src={logo} alt="logo" />
           </div>
           <div
             className={`lg:flex ${
-              isMenuOpen ? "" : "hidden"
+              isMenuOpen ? "hidden" : "hidden"
             } gap-4 text-white text-lg mt-8 flex-col`}
           >
             <Link
@@ -119,7 +119,7 @@ function AdminNavbar() {
         </div>
       </div>
       {isMenuOpen && (
-        <div className="lg:hidden fixed z-10 right-0 left-0 bg-[#002259] text-white text-lg flex flex-col items-right px-10 py-2">
+        <div className="lg:hidden fixed z-10 right-0 left-0 bg-[#002259] text-white text-lg flex flex-col items-right px-10 py-2 top-20">
           <Link to="/admin_dashboard">Dashboard</Link>
           <Link to="/admin_tbl_interval">Tabel Interval ETD</Link>
           <Link to="/admin_tbl_ciri">Tabel Ciri Jenazah</Link>

@@ -180,14 +180,14 @@ function TestResult() {
         </div>
         <div className="container relative flex-col lg:w-[68%] w-[85%] h-[72%] flex justify-center">
           <div className=" bg-white flex-col h-full rounded-3xl items-center overflow-y-auto shadow-xl">
-            <div className=" flex justify-between pt-10 lg:px-16 px-10">
+            <div className="lg:flex justify-between pt-10 lg:px-16 px-10">
               <div className="text-4xl font-extrabold lg:flex   text-[#002259]">
                 Test Result
               </div>
-              <div className="flex gap-3">
+              <div className="lg:flex gap-3 ">
                 <ReactToPrint
                   trigger={() => (
-                    <button className="bg-[#f3b420] text-white px-10 py-2 rounded-md">
+                    <button className="bg-[#f3b420] text-white px-10 py-2 rounded-md lg:my-0 md:my-0 my-2">
                       Print Test Result
                     </button>
                   )}

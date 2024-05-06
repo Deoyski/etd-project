@@ -52,9 +52,9 @@ function Message() {
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
-        <div className="container relative flex-col lg:w-[50%] w-[90%] lg:h-[65%] flex justify-center">
+        <div className="container relative flex-col lg:w-[50%] w-[90%] lg:h-[65%] md:h-[65%] flex justify-center">
           <form className=" bg-white flex-col h-full lg:p-10 p-6 rounded-3xl lg:px-16 shadow-xl justify-center items-center flex " onSubmit={handleSubmit}>
-            <div className="lg:text-6xl text-5xl font-extrabold flex-col text-center justify-center text-[#002259]">
+            <div className="lg:text-6xl md:text-5xl text-3xl font-extrabold flex-col text-center justify-center text-[#002259]">
               Message to Doctor
             </div>
             <div className="pt-6 pb-3 w-full">

@@ -13,12 +13,12 @@ function Home() {
         </div>
 
         <div className="container relative z-0 flex-col flex justify-center text-center">
-          <div className="lg:text-6xl text-5xl font-extrabold lg:flex justify-center text-center">
+          <div className="lg:text-6xl md:text-5xl text-4xl font-extrabold lg:flex justify-center text-center">
             <div className="text-white pr-2">Estimated </div>
             <div className="text-[#F3B320]"> Time Since Death</div>
           </div>
           <div className="flex justify-center w-full pt-2 pb-6">
-            <div className="text-center justify-center  text-white text-3xl py-6 lg:w-[55%]">
+            <div className="text-center justify-center  text-white lg:text-3xl text-xl py-6 lg:w-[55%] px-5">
               <b>Expert system for estimating time since death</b> that using
               previous research cases and the experience of an expert
             </div>

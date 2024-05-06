@@ -54,7 +54,7 @@ function CorpseData() {
         <div className="absolute inset-0 w-full h-full bg-cover bg-no-repeat">
           <img className="w-full h-full object-cover" src={background} alt="" />
         </div>
-        <div className="container relative flex-col lg:w-[50%] w-[80%] h-[58%] flex justify-center">
+        <div className="container relative flex-col lg:w-[50%] w-[80%] lg:h-[58%] md:h-[58%] h-[80%] flex justify-center">
           <div className=" bg-white flex-col h-full p-10 rounded-3xl lg:px-16 shadow-xl overflow-y-auto">
             <div className="text-5xl font-extrabold lg:flex   text-[#002259]">
               Corpse Data
