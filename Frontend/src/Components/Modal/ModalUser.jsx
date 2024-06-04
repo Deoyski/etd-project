@@ -7,7 +7,7 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
     username: "",
     email: "",
     password: "",
-    role: "",
+    role: "user",
   });
 
   useEffect(() => {
@@ -24,6 +24,7 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
   };
 
   const handleRoleChange = (e) => {
+    console.log(e);
     setFormData({
       ...formData,
       role: e.target.value,
@@ -32,6 +33,7 @@ function ModalUser({ closeModal, selectedData, fetchData }) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(selectedData);
     const apiUrl = selectedData
       ? `http://localhost:5000/users/${selectedData.id}`
       : "http://localhost:5000/users";

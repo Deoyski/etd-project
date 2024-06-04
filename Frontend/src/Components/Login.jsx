@@ -25,7 +25,7 @@ function Login() {
         localStorage.setItem('role', data.role);
         localStorage.setItem('id', data.id);
         localStorage.setItem('username', data.username);
-        console.log(data.username);
+        // console.log(data.username);
         
         // Redirect sesuai dengan role
         if (data.role === 'admin' || data.role === 'master') {

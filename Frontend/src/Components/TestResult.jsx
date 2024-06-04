@@ -58,19 +58,17 @@ function TestResult() {
   };
 
   const determineIntervalId = (ruleBaseData, answerCodes) => {
-    // Buat objek untuk menyimpan jumlah kemunculan cirijenazahId untuk setiap intervalId
+    // Menyimpan objek setiap ciri jenazah id yg ditemukan
     const intervalCount = {};
 
-    // Inisialisasi set answerCodes untuk memudahkan pencarian
+    // Inisialisasi answerCodes yang dijawab YA
     const matchedCiriJenazahIds = new Set(answerCodes);
-    console.log("Data yang match:", matchedCiriJenazahIds);
 
-    // Iterasi setiap item pada data rule base
+    // Iterasi 
     ruleBaseData.forEach((item) => {
       const intervalId = item.intervalId;
       const ciriJenazahId = item.ciriJenazahId;
-
-      console.log("Iterasi:", item);
+      // console.log("Iterasi:", item);
 
       // Tambahkan intervalId ke intervalCount jika belum ada
       if (!intervalCount[intervalId]) {
@@ -79,51 +77,55 @@ function TestResult() {
 
       // Tambahkan ciriJenazahId ke set pada intervalId
       intervalCount[intervalId].add(ciriJenazahId);
-      console.log("Interval Count setelah penambahan:", intervalCount);
+      // console.log("Interval Count setelah penambahan:", intervalCount);
     });
 
-    // Temukan intervalId yang memiliki semua cirijenazah yang cocok dengan answerCodes
+    // Inisialisasi penampung interval ID yang terpilih
     let matchedIntervalId = null;
 
+    // Iterasi pengecekan 
     for (const [intervalId, ciriJenazahSet] of Object.entries(intervalCount)) {
+
+      // Inisialisasi match
       let isMatched = true;
 
-      // Periksa apakah semua ciri jenazah pada intervalId cocok dengan answerCodes
+      // Meriksa apakah semua ciri jenazah pada intervalId cocok dengan answerCodes
       for (const ciriJenazahId of ciriJenazahSet) {
+
+        // Jika ada ciri jenazah pada intervalId yang tidak cocok, set isMatched menjadi false
         if (!matchedCiriJenazahIds.has(ciriJenazahId)) {
-          // Jika ada ciri jenazah pada intervalId yang tidak cocok, set isMatched menjadi false
           isMatched = false;
           break;
         }
       }
 
+      // Jika semuanya cocok
       if (isMatched) {
         console.log("Semua cirijenazah ditemukan pada intervalId:", intervalId);
-        // Jika semua ciri jenazah pada intervalId cocok dengan answerCodes, set matchedIntervalId dan keluar dari loop
         matchedIntervalId = intervalId;
         break;
       }
     }
 
+    // Cek beneran ke return apa tidak
     console.log("Interval ID yang cocok:", matchedIntervalId);
     return matchedIntervalId;
   };
 
   const fetchIntervalData = (matchedIntervalId) => {
+    // Cek interval ID apakah ke kirim atau tidak
     console.log("data yang masuk" , matchedIntervalId);
     fetch(`http://localhost:5000/interval/${matchedIntervalId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log("ini data interval", data);
         const mostFrequentTimeOfDeath = data.keterangan;
-        // Check if timeOfDeath is already set
         if (timeOfDeath === null) {
           setTimeOfDeath(mostFrequentTimeOfDeath);
         }
       })
       .catch((error) => {
         console.error(error);
-        // If there's an error, set timeOfDeath to default value
         setTimeOfDeath("Waktu saat kematian belum dapat ditentukan");
       });
   };

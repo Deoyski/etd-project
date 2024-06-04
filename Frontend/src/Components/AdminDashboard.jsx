@@ -109,7 +109,7 @@ function AdminDashboard() {
                   </div>
                 </Link>
                 <Link
-                  to="/admin_rule_base"
+                  to="/admin_tbl_interval"
                   className="w-4/12 hover:bg-[#fffff] bg-white rounded-lg hover:bg-[#F3B320] hover:text-white flex justify-center items-center lg:ps-10 ps-4"
                 >
                   <div className="w-2/6">
@@ -132,7 +132,7 @@ function AdminDashboard() {
                         {dataInterval.length !== null ? dataInterval.length : 0}
                       </div>
                       <div className="text-[#002259] text-lg">
-                        Total Rule Base
+                        Total Interval ETD
                       </div>
                     </div>
                   </div>
